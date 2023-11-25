@@ -10,7 +10,7 @@ public class NewTask {
     public static void main(String[] args) {
         ConnectionFactory factory = new ConnectionFactory();
         factory.setHost("localhost");
-        String argv = "saluti da ciamb...........";
+        String argv = "hello from italy....................";
 
         try (Connection connection = factory.newConnection()) {
             Channel channel = connection.createChannel();

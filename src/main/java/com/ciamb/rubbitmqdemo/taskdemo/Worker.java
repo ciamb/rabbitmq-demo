@@ -21,6 +21,7 @@ public class Worker {
         channel.queueDeclare(QUEUE_NAME, false, false, false, null);
         System.out.println(" [*] Waiting for messages. To exit press CTRL+R");
 
+        channel.basicQos(1); //accetta solo un messaggio non correttamente gestito da un altro consumer alla volta
 
         DeliverCallback deliverCallback = (consumerTag, delivery) -> {
             String message = new String(delivery.getBody(), "UTF-8");
@@ -31,10 +32,12 @@ public class Worker {
             } catch (Exception e) {
                 System.out.println("unhandled error: " + e);
             } finally {
-                System.out.println(" [*] done");
+                System.out.println(" [*] hello ciamb");
+                channel.basicAck(delivery.getEnvelope().getDeliveryTag(), false); //conferma del messaggio
             }
         };
-        boolean autoAck = true;
+
+        boolean autoAck = false;
         channel.basicConsume(QUEUE_NAME, autoAck, deliverCallback, consumerTag -> { });
     }
 
