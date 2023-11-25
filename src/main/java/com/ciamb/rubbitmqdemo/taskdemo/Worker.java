@@ -10,7 +10,8 @@ import java.util.concurrent.TimeoutException;
 
 public class Worker {
 
-    private final static String QUEUE_NAME = "Hello";
+    private final static String QUEUE_NAME = "Hello"; //first queue
+    private final static String TASK_QUEUE = "task_queue"
 
     public static void main(String[] args) throws IOException, TimeoutException {
         ConnectionFactory factory = new ConnectionFactory();
@@ -18,8 +19,10 @@ public class Worker {
         Connection connection = factory.newConnection();
         Channel channel = connection.createChannel();
 
-        channel.queueDeclare(QUEUE_NAME, false, false, false, null);
-        System.out.println(" [*] Waiting for messages. To exit press CTRL+R");
+        boolean durable = true;
+
+        channel.queueDeclare(TASK_QUEUE, durable, false, false, null);
+        System.out.println(" [*] Waiting for messages. You can exit when you want");
 
         channel.basicQos(1); //accetta solo un messaggio non correttamente gestito da un altro consumer alla volta
 
