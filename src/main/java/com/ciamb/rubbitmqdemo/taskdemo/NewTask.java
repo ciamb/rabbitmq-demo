@@ -7,7 +7,7 @@ import com.rabbitmq.client.MessageProperties;
 
 public class NewTask {
     private final static String QUEUE_NAME = "Hello";
-    private final static String TASK_QUEUE = "task_queue"
+    private final static String TASK_QUEUE = "task_queue";
 
 
     public static void main(String[] args) {
