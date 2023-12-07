@@ -1,4 +1,4 @@
-package com.ciamb.rubbitmqdemo.taskdemo;
+package com.ciamb.rubbitmqdemo.acknowledgedemo;
 
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
