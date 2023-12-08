@@ -18,7 +18,7 @@ public class TopicsReceiver {
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.TOPIC);
         var queueName = channel.queueDeclare().getQueue();
 
-        var keyList = Arrays.asList( "lazy.#");
+        var keyList = Arrays.asList("*.pigeon", "lazy.#");
         for (var key : keyList) {
             channel.queueBind(queueName, EXCHANGE_NAME, key);
         }
