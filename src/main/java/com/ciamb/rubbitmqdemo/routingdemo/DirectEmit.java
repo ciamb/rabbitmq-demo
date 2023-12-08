@@ -23,13 +23,19 @@ public class DirectEmit {
 
             channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
 
-            var severity = "ERROR";
-            String argv = "greetings from ciamb with severity : [ "+ severity + " ]";
+            var list = Arrays.asList("INFO", "ERROR", "DEBUG");
 
-            var message = String.join(" ", argv);
+            for (String severity : list) {
+                String argv = "greetings from ciamb with severity : [ " + severity + " ]";
+                var message = String.join(" ", argv);
 
-            channel.basicPublish(EXCHANGE_NAME, severity, null, message.getBytes(StandardCharsets.UTF_8));
-            System.out.println(" [x] sent ' "+ severity + " : { " + message + " } '");
+                channel.basicPublish(EXCHANGE_NAME,
+                        severity,
+                        null,
+                        message.getBytes(StandardCharsets.UTF_8)
+                );
+                System.out.println(" [x] sent ' " + severity + " : { " + message + " } '");
+            }
 
         } catch (Exception e) {
             System.out.println(" unhandled exception; \n" + Arrays.toString(e.getStackTrace()));

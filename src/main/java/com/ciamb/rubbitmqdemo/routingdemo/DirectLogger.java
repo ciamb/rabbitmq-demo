@@ -20,9 +20,9 @@ public class DirectLogger {
         channel.exchangeDeclare(EXCHANGE_NAME, BuiltinExchangeType.DIRECT);
         var queueName = channel.queueDeclare().getQueue();
 
-        var strings = Arrays.asList("ERROR");
-        for (String s : strings) {
-            channel.queueBind(queueName, EXCHANGE_NAME, s);
+        var list = Arrays.asList("INFO", "ERROR", "DEBUG"); //run another with only ERROR
+        for (String severity : list) {
+            channel.queueBind(queueName, EXCHANGE_NAME, severity);
         }
         System.out.println(" [*] is waiting for messages");
 
